@@ -4,7 +4,7 @@ import { Route, Switch, Link } from 'react-router-dom';
 import Login from './components/LoginForm';
 import NavBar from './components/NavBar'
 import CardContainer from './containers/CardContainer'
-
+import NewUser from './components/CreateUserForm'
 import './App.css';
 
 class App extends Component {
@@ -37,10 +37,7 @@ class App extends Component {
     return users.filter(user => user.type_of === type)
   }
 
-  
-
   render() {
-    console.log(this.state.filteredMentors)
 
     return (
       <React.Fragment>
@@ -60,6 +57,7 @@ class App extends Component {
         <Route path='/mentors' render={() => (
             <CardContainer users={this.state.filteredMentors}/>
         )} />
+        <Route exact path='/new_user' component={NewUser}/>
 
       </Switch>
       </React.Fragment>

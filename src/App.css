@@ -37,3 +37,6 @@ div#welcome {
   text-align: center;
   padding: 10%;
 }
+.ui.button{
+  margin-top: 20px;
+}
