@@ -1,14 +1,21 @@
 import React from 'react'
 import MentorCard from '../components/MentorCard'
+import MentorDetail from '../components/MentorDetail'
+import { Switch, Route } from 'react-router-dom'
 
 class CardContainer extends React.Component {
   render() {
     console.log (`woot props `,this.props.users)
     return (
+      <Switch>
+        <Route to="/mentors/:user_id" render={ (props) => (<MentorDetail mentorId={props.user_id} />)} />
 
-      <div className="ui cards">
-        {this.props.users.length > 0 ? this.props.users.map(user => <MentorCard user={user} />): null}
-      </div>
+        <Route exact to="/mentors" render={() => (
+          <div className="ui cards">
+            {this.props.users.length > 0 ? this.props.users.map(user => <MentorCard user={user} />): null}
+          </div>
+        )} />
+      </Switch>
     )
   }
 
