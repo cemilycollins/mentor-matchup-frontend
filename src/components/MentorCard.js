@@ -2,7 +2,7 @@ import React from 'react'
 
 class MentorCard extends React.Component {
   render () {
-    const {user} = this.props.user
+    const {user} = this.props
     return (
       <div className='card'>
         <div className='content'>
