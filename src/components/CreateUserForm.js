@@ -66,6 +66,7 @@ class CreateUserForm extends React.Component{
             <textarea onChange={(e)=>this.changeHandler(e.target.value,'bio')}  name="bio" placeholder="Tell us about yourself..." />
           </div>
           <Dropdown placeholder='Pick one' fluid selection options={this.arr}/>
+
           <button className="ui blue button" type="submit">Submit</button>
         </form>
       </div>
