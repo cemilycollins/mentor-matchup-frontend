@@ -37,6 +37,8 @@ class App extends Component {
     return users.filter(user => user.type_of === type)
   }
 
+  
+
   render() {
     console.log(this.state.filteredMentors)
 
