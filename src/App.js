@@ -11,13 +11,35 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
+      allUsers: [],
       allMentors: [],
+      allMentees: [],
       filteredMentors: [],
       filter: ''
     }
   }
+  componentDidMount(){
+    fetch('http://localhost:3000/users')
+    .then(res=> res.json())
+    .then(json=>{
+      let mentors = this.filterByType(json,'mentor')
+      let mentees = this.filterByType(json, 'mentee')
+
+      this.setState({
+      allUsers: json,
+      allMentors: mentors,
+      allMentees: mentees,
+      filteredMentors: mentors
+    })
+  })
+  }
+  filterByType=(users,type)=>{
+    return users.filter(user => user.type_of === type)
+  }
 
   render() {
+    console.log(this.state.filteredMentors)
+
     return (
       <React.Fragment>
       <NavBar />
