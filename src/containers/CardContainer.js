@@ -4,7 +4,7 @@ import MentorCard from '../components/MentorCard'
 class CardContainer extends React.Component {
   render() {
     return (
-      <div>
+      <div className="ui cards">
         {this.props.users.map(user => <MentorCard user={user} />)}
       </div>
     )
