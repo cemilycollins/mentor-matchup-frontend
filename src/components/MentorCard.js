@@ -13,12 +13,6 @@ class MentorCard extends React.Component {
             <p id='relevant-info'>${user.description}</p>
           </div>
         </div>
-        <div className='extra content'>
-          <div className='ui two buttons'>
-            <div className='ui basic blue button'>Edit</div>
-            <div className='ui basic red button'>Delete</div>
-          </div>
-        </div>
       </div>
     )
   }

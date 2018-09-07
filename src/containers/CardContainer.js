@@ -5,7 +5,8 @@ class CardContainer extends React.Component {
   render() {
     console.log (`woot props `,this.props.users)
     return (
-      <div>
+
+      <div className="ui cards">
         {this.props.users.length > 0 ? this.props.users.map(user => <MentorCard user={user} />): null}
       </div>
     )
