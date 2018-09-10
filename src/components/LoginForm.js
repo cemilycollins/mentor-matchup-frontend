@@ -24,11 +24,13 @@ export default class Login extends React.Component {
         }
       })
       .then(json => {
+        debugger
         this.props.updateUser(json.user);
         localStorage.setItem("token", json.token);
         this.props.history.push('/profile')
       });
   };
+
   render(){
   return (
     <div style={{padding: '10%', width: '75%', margin: 'auto'}}>
