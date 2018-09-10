@@ -49,7 +49,7 @@ class CreateUserForm extends React.Component{
         body: JSON.stringify({
           name: this.state.name,
           email: this.state.email,
-          password: this.state.password,
+          password_digest: this.state.password,
           job_title: this.state.job_title,
           bio: this.state.bio,
           type_of: this.state.type_of,
