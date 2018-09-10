@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 const Profile = (props) => {
   const {user} = props
-  if (user != {}) {
+  if (user) {
   return (
     <div className="ui segment">
       <div className="ui top attached label">My Profile</div>
