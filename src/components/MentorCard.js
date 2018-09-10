@@ -10,8 +10,8 @@ class MentorCard extends React.Component {
           <div className='header' id='name'>{user.name}</div>
           <div className='meta'>{user.title}</div>
           <div className='description'>
-            <b>Location: ${user.location}</b>
-            <p id='relevant-info'>${user.description}</p>
+            <b>Location: {user.location}</b>
+            <p id='relevant-info'>{user.description}</p>
           </div>
         </div>
       </Link>

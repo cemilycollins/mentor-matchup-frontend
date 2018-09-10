@@ -1,10 +1,13 @@
-import React {Component} from 'react'
+
 import MentorCard from './components/MentorCard'
 
 
+import React from "react"
 
-export default class MatchContainer extends Component{
-  render(){
-    return <div>MatchContainer</div>
-  }
+const MatchContainer = (props) => {
+  return (
+    <h2>This is the match container</h2>
+  )
 }
+
+export default MatchContainer

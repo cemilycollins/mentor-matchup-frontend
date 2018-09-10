@@ -27,6 +27,23 @@ const NavBar = props => {
       >
         Login
       </NavLink>
+      {props.user.type_of === "mentee" ? <NavLink id="nav-item"
+        exact
+        to="/mentors"
+        className="ui item"
+        activeClassName="ui active item"
+      >
+        Mentors
+      </NavLink> : null}
+      {props.user ? <NavLink id="nav-item"
+        exact
+        to="/profile"
+        className="ui item"
+        activeClassName="ui active item"
+      >
+        Profile
+      </NavLink> : null}
+
     </div>
   );
 };

@@ -5,6 +5,8 @@ import Login from './components/LoginForm';
 import NavBar from './components/NavBar'
 import CardContainer from './containers/CardContainer'
 import NewUser from './components/CreateUserForm'
+import MatchContainer from './containers/MatchContainer'
+import Profile from './components/Profile'
 import './App.css';
 
 const requestHelper = url =>
@@ -25,6 +27,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
+      user: {},
       allUsers: [],
       allMentors: [],
       allMentees: [],
@@ -33,6 +36,7 @@ class App extends Component {
       user: null
     }
   }
+
 
 
   fetchUser = () => {
@@ -64,20 +68,54 @@ class App extends Component {
      this.fetchUser();
    }
    this.fetchUsers()
+
+      this.setState({
+      allUsers: json,
+      allMentors: mentors,
+      allMentees: mentees,
+      user: mentees[0],
+      filteredMentors: mentors
+    })
+  })
+
   }
   filterByType=(users,type)=>{
     return users.filter(user => user.type_of === type)
   }
 
+
   loginHandler=()=>{
 
   }
+
+
+  getUser = () => {
+    fetch(`http://localhost:3000/users/${this.state.user.id}`)
+      .then(r => r.json())
+      .then(user => this.setState({user}))
+  }
+
+  addMentor = (mentorId) => {
+    fetch('http://localhost:3000/matches', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accepts": "application/json"
+      },
+      body: JSON.stringify({
+        mentee_id: this.state.user.id,
+        mentor_id: mentorId
+      })
+    }).then(r => r.json())
+      .then(json => this.getUser())
+    }
+
 
   render() {
 
     return (
       <React.Fragment>
-      <NavBar />
+      <NavBar user={this.state.user}/>
       <Switch>
         <Route exact path='/' render={() => (
             <React.Fragment>
@@ -89,9 +127,18 @@ class App extends Component {
               </div>
             </React.Fragment>
           )} />
+
         <Route exact path='/login' render={() => <Login updateUser={this.updateUser} />} />
+
+        <Route exact path='/login' render={Login} />
+        <Route exact path='/profile' render={() => (
+          <React.Fragment>
+            <Profile user={this.state.user}/>
+            <MatchContainer />
+          </React.Fragment>
+        )} />
         <Route path='/mentors' render={() => (
-            <CardContainer users={this.state.filteredMentors} />
+            <CardContainer users={this.state.filteredMentors} addMentor={this.addMentor}/>
         )} />
         <Route exact path='/new_user' component={NewUser}/>
 
