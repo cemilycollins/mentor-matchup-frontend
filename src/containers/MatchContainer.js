@@ -1,5 +1,5 @@
 
-import MentorCard from './components/MentorCard'
+
 
 
 import React from "react"

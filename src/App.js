@@ -68,24 +68,10 @@ class App extends Component {
      this.fetchUser();
    }
    this.fetchUsers()
-
-      this.setState({
-      allUsers: json,
-      allMentors: mentors,
-      allMentees: mentees,
-      user: mentees[0],
-      filteredMentors: mentors
-    })
-  })
-
   }
+
   filterByType=(users,type)=>{
     return users.filter(user => user.type_of === type)
-  }
-
-
-  loginHandler=()=>{
-
   }
 
 
