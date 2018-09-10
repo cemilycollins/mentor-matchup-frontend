@@ -40,3 +40,8 @@ div#welcome {
 .ui.button{
   margin-top: 20px;
 }
+
+.ui.segment {
+  width: 80%;
+  margin: auto;
+}

@@ -55,7 +55,7 @@ class App extends Component {
           )} />
         <Route exact path='/login' render={Login} />
         <Route path='/mentors' render={() => (
-            <CardContainer users={this.state.filteredMentors}/>
+            <CardContainer users={this.state.filteredMentors} />
         )} />
         <Route exact path='/new_user' component={NewUser}/>
 
