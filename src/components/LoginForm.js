@@ -32,7 +32,6 @@ export default class Login extends React.Component {
   };
 
   render(){
-
   return (
     <div style={{padding: '10%', width: '75%', margin: 'auto'}}>
       <h2>Sign In</h2>
