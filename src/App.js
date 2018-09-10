@@ -7,6 +7,20 @@ import CardContainer from './containers/CardContainer'
 import NewUser from './components/CreateUserForm'
 import './App.css';
 
+const requestHelper = url =>
+  fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  }).then(res => {
+    if (res.status === 401) {
+      alert("login failed");
+    } else {
+      return res.json();
+    }
+  });
+
 class App extends Component {
   constructor() {
     super()
@@ -15,26 +29,48 @@ class App extends Component {
       allMentors: [],
       allMentees: [],
       filteredMentors: [],
-      filter: ''
+      filter: '',
+      user: null
     }
   }
-  componentDidMount(){
-    fetch('http://localhost:3000/users')
-    .then(res=> res.json())
-    .then(json=>{
-      let mentors = this.filterByType(json,'mentor')
-      let mentees = this.filterByType(json, 'mentee')
 
-      this.setState({
-      allUsers: json,
-      allMentors: mentors,
-      allMentees: mentees,
-      filteredMentors: mentors
-    })
-  })
+
+  fetchUser = () => {
+    requestHelper("http://localhost:3000/me").then(this.updateUser);
+   }
+   updateUser = user => {
+    this.setState({ user });
+  };
+
+   fetchUsers= () =>{
+     fetch('http://localhost:3000/users')
+     .then(res=> res.json())
+     .then(json=>{
+       let mentors = this.filterByType(json,'mentor')
+       let mentees = this.filterByType(json, 'mentee')
+
+       this.setState({
+       allUsers: json,
+       allMentors: mentors,
+       allMentees: mentees,
+       filteredMentors: mentors
+     })
+   })
+   }
+
+
+  componentDidMount(){
+    if (localStorage.getItem("token")) {
+     this.fetchUser();
+   }
+   this.fetchUsers()
   }
   filterByType=(users,type)=>{
     return users.filter(user => user.type_of === type)
+  }
+
+  loginHandler=()=>{
+
   }
 
   render() {
@@ -53,7 +89,7 @@ class App extends Component {
               </div>
             </React.Fragment>
           )} />
-        <Route exact path='/login' render={Login} />
+        <Route exact path='/login' render={() => <Login updateUser={this.updateUser} />} />
         <Route path='/mentors' render={() => (
             <CardContainer users={this.state.filteredMentors} />
         )} />

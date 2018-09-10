@@ -1,6 +1,6 @@
 import React from 'react'
 import { Dropdown } from 'semantic-ui-react'
-
+import {Link} from 'react-router-dom'
 class CreateUserForm extends React.Component{
 
 
@@ -58,7 +58,6 @@ class CreateUserForm extends React.Component{
       })
       .then(res=> res.json())
       .then(json=> console.log(json))
-      // add route for detail page
     }
 
 
@@ -93,7 +92,7 @@ class CreateUserForm extends React.Component{
           </div>
           <Dropdown onChange={(e)=>this.changeHandler(e.target,'type_of')} placeholder='Pick one' fluid selection options={this.arr}/>
 
-          <button className="ui blue button" type="submit">Submit</button>
+          <Link to="/login" className="ui blue button" type="submit">Submit</Link>
         </form>
       </div>
     )
