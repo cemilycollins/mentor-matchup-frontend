@@ -37,12 +37,12 @@ class App extends Component {
     }
   }
 
-
-
   fetchUser = () => {
     requestHelper("http://localhost:3000/me").then(this.updateUser);
-   }
-   updateUser = user => {
+  }
+
+  updateUser = user => {
+    debugger
     this.setState({ user });
   };
 
@@ -66,19 +66,10 @@ class App extends Component {
   componentDidMount(){
     if (localStorage.getItem("token")) {
      this.fetchUser();
-   }
-   this.fetchUsers()
-
-      this.setState({
-      allUsers: json,
-      allMentors: mentors,
-      allMentees: mentees,
-      user: mentees[0],
-      filteredMentors: mentors
-    })
-  })
-
+    }
+    this.fetchUsers()
   }
+
   filterByType=(users,type)=>{
     return users.filter(user => user.type_of === type)
   }
@@ -86,13 +77,6 @@ class App extends Component {
 
   loginHandler=()=>{
 
-  }
-
-
-  getUser = () => {
-    fetch(`http://localhost:3000/users/${this.state.user.id}`)
-      .then(r => r.json())
-      .then(user => this.setState({user}))
   }
 
   addMentor = (mentorId) => {
@@ -107,7 +91,7 @@ class App extends Component {
         mentor_id: mentorId
       })
     }).then(r => r.json())
-      .then(json => this.getUser())
+      .then(json => this.fetchUser())
     }
 
 
@@ -128,9 +112,7 @@ class App extends Component {
             </React.Fragment>
           )} />
 
-        <Route exact path='/login' render={() => <Login updateUser={this.updateUser} />} />
-
-        <Route exact path='/login' render={Login} />
+        <Route exact path='/login' render={(props) => <Login {...props} updateUser={this.updateUser} />} />
         <Route exact path='/profile' render={() => (
           <React.Fragment>
             <Profile user={this.state.user}/>

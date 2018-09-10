@@ -1,7 +1,3 @@
-
-import MentorCard from './components/MentorCard'
-
-
 import React from "react"
 
 const MatchContainer = (props) => {
