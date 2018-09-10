@@ -10,7 +10,7 @@ class CreateUserForm extends React.Component{
     this.state={
       name: '',
       email: '',
-      password: '',
+      password_digest: '',
       job_title: '',
       bio: '',
       type_of: '',
@@ -58,6 +58,7 @@ class CreateUserForm extends React.Component{
       })
       .then(res=> res.json())
       .then(json=> console.log(json))
+      // add route for detail page
     }
 
 
