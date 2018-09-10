@@ -42,7 +42,6 @@ class App extends Component {
   }
 
   updateUser = user => {
-    debugger
     this.setState({ user });
   };
 

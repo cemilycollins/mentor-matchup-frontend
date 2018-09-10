@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 
 export default class Login extends React.Component {
   handleSubmit = e => {
-    e.preventDefault();
     let data = JSON.stringify({
       email: e.target.querySelector('input[name="email"]').value,
       password: e.target.querySelector('input[name="password"]').value
@@ -25,13 +24,15 @@ export default class Login extends React.Component {
         }
       })
       .then(json => {
+        debugger
         this.props.updateUser(json.user);
         localStorage.setItem("token", json.token);
         this.props.history.push('/profile')
       });
   };
+
   render(){
-    console.log(this.props)
+
   return (
     <div style={{padding: '10%', width: '75%', margin: 'auto'}}>
       <h2>Sign In</h2>
@@ -44,7 +45,7 @@ export default class Login extends React.Component {
           <label htmlFor="password">Password</label>
           <input type="text" name="password" placeholder="Password" />
         </div>
-        <div className="ui blue button" type="submit">Log In</div>
+        <button className="ui blue button" type="submit">Log In</button>
       </Form>
     </div>
   );

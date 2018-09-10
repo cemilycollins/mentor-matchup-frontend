@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 
 const Profile = (props) => {
   const {user} = props
+  console.log(user)
   if (user) {
   return (
     <div className="ui segment">
@@ -19,7 +20,7 @@ const Profile = (props) => {
 
       <div className='extra content'>
         <div className='ui two buttons'>
-          <div className='ui active basic blue button' onClick={() => this.props.addMentor(user.id)}>Add Skill</div>
+          <div className='ui active basic blue button' onClick={() => console.log("mentee!!")}>Add Skill</div>
           <Link to="/mentors" className='ui basic black button'>Back To All Mentors</Link>
         </div>
       </div>
