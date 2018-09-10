@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Button } from 'semantic-ui-react'
+import { Link } from "react-router-dom"
 
 export default class Login extends React.Component {
   handleSubmit = e => {
@@ -26,9 +27,11 @@ export default class Login extends React.Component {
       .then(json => {
         this.props.updateUser(json.user);
         localStorage.setItem("token", json.token);
+        this.props.history.push('/profile')
       });
   };
   render(){
+    console.log(this.props)
   return (
     <div style={{padding: '10%', width: '75%', margin: 'auto'}}>
       <h2>Sign In</h2>
@@ -41,7 +44,7 @@ export default class Login extends React.Component {
           <label htmlFor="password">Password</label>
           <input type="text" name="password" placeholder="Password" />
         </div>
-        <Button className="ui blue button" type="submit">Log In</Button>
+        <div className="ui blue button" type="submit">Log In</div>
       </Form>
     </div>
   );
