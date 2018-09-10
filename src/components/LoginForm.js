@@ -9,7 +9,7 @@ export default class Login extends React.Component {
       email: e.target.querySelector('input[name="email"]').value,
       password: e.target.querySelector('input[name="password"]').value
     });
-    fetch('http://localhost:3000' + "/login", {
+    fetch('http://localhost:3000/login', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -74,11 +74,6 @@ class App extends Component {
     return users.filter(user => user.type_of === type)
   }
 
-
-  loginHandler=()=>{
-
-  }
-
   addMentor = (mentorId) => {
     fetch('http://localhost:3000/matches', {
       method: "POST",
