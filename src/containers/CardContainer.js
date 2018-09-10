@@ -12,7 +12,7 @@ class CardContainer extends React.Component {
   render() {
     return (
       <Switch>
-        <Route path="/mentors/:user_id" render={ (props) => (<MentorDetail user={this.findUser(props.match.params.user_id)}/>)} />
+        <Route path="/mentors/:user_id" render={ (props) => (<MentorDetail user={this.findUser(props.match.params.user_id)} addMentor={this.props.addMentor}/>)} />
         <Route exact path="/mentors" render={() => (
           <div className="ui cards">
             {this.props.users.length > 0 ? this.props.users.map(user => <MentorCard user={user} />): null}
