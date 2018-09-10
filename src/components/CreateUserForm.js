@@ -30,9 +30,34 @@ class CreateUserForm extends React.Component{
   ]
 
     changeHandler=(val, key)=>{
+      if(key === 'type_of'){
+        val = val.innerText.toLowerCase()
+      }
       this.setState({
-        key: val
+        [key]: val
       })
+    }
+
+    addToDB=(e)=>{
+      e.preventDefault()
+      fetch('http://localhost:3000/users/',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'Accept':'application/json'
+        },
+        body: JSON.stringify({
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password,
+          job_title: this.state.job_title,
+          bio: this.state.bio,
+          type_of: this.state.type_of,
+          location: this.state.location
+        })
+      })
+      .then(res=> res.json())
+      .then(json=> console.log(json))
     }
 
 
@@ -40,7 +65,7 @@ class CreateUserForm extends React.Component{
     return(
       <div style={{padding: '10%', width: '75%', margin: 'auto'}}>
 
-        <form className="ui form">
+        <form onSubmit={this.addToDB} className="ui form">
           <div className="ui form field">
             <label htmlFor="email">Email</label>
             <input onChange={(e)=>this.changeHandler(e.target.value,'email')} type="text" name="email" placeholder="Email" />
@@ -65,7 +90,7 @@ class CreateUserForm extends React.Component{
             <label htmlFor="bio">Bio</label>
             <textarea onChange={(e)=>this.changeHandler(e.target.value,'bio')}  name="bio" placeholder="Tell us about yourself..." />
           </div>
-          <Dropdown placeholder='Pick one' fluid selection options={this.arr}/>
+          <Dropdown onChange={(e)=>this.changeHandler(e.target,'type_of')} placeholder='Pick one' fluid selection options={this.arr}/>
 
           <button className="ui blue button" type="submit">Submit</button>
         </form>
@@ -76,16 +101,3 @@ class CreateUserForm extends React.Component{
 }
 
 export default CreateUserForm
-
-// <div className="field">
-//   <label>Mentor or Mentee?</label>
-//   <div className="ui selection dropdown">
-//     <input type="hidden" name="type_of"/>
-//     <i className="dropdown icon"></i>
-//       <div className="default text">Type</div>
-//         <div className="menu">
-//         <div className="item" data-value="1">Mentor</div>
-//         <div className="item" data-value="0">Mentee</div>
-//       </div>
-//     </div>
-//   </div>
