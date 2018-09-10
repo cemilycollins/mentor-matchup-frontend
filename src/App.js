@@ -42,7 +42,6 @@ class App extends Component {
   }
 
   updateUser = user => {
-    debugger
     this.setState({ user });
   };
 
@@ -107,7 +106,6 @@ class App extends Component {
             </React.Fragment>
           )} />
         <Route exact path='/login' render={(props) => <Login {...props} updateUser={this.updateUser} />} />
-
         <Route exact path='/profile' render={() => (
           <React.Fragment>
             <Profile user={this.state.user}/>

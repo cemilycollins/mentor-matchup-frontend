@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 
 const Profile = (props) => {
   const {user} = props
+  console.log(user)
   if (user) {
   return (
     <div className="ui segment">
