@@ -88,6 +88,9 @@ class App extends Component {
       .then(json => this.fetchUser())
     }
 
+    findUserById=(id)=>{
+      return this.state.allUsers.find(user=> user.id === id)
+    }
 
   render() {
 
@@ -108,7 +111,7 @@ class App extends Component {
         <Route exact path='/login' render={(props) => <Login {...props} updateUser={this.updateUser} />} />
         <Route exact path='/profile' render={() => (
           <React.Fragment>
-            <Profile user={this.state.user}/>
+            <Profile user={this.state.user} findUserById={this.findUserById}/>
             <MatchContainer />
           </React.Fragment>
         )} />

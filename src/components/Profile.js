@@ -2,9 +2,13 @@ import React from "react"
 import {Link} from 'react-router-dom'
 
 const Profile = (props) => {
-  const {user} = props
-  console.log(user)
-  if (user) {
+
+
+
+  if (props.user) {
+
+    const user = props.findUserById(props.user.id)
+    debugger
   return (
     <div className="ui segment">
       <div className="ui top attached label">My Profile</div>
