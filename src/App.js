@@ -106,7 +106,6 @@ class App extends Component {
               </div>
             </React.Fragment>
           )} />
-
         <Route exact path='/login' render={(props) => <Login {...props} updateUser={this.updateUser} />} />
         <Route exact path='/profile' render={() => (
           <React.Fragment>
