@@ -4,20 +4,20 @@ import {Link} from 'react-router-dom'
 const Profile = (props) => {
 
 
-
+  console.log(props)
   if (props.user) {
 
     const user = props.findUserById(props.user.id)
-    debugger
+
   return (
     <div className="ui segment">
       <div className="ui top attached label">My Profile</div>
         <p><b>Name:</b> {user.name}</p>
-        {user.user_skills && user.user_skills.length > 0 ? <p><b>Skills:</b>
+        {user.user_skills && user.user_skills.length > 0 ? <div><b>Skills:</b>
           <ul>
           {user.user_skills.map(us => <li>{us.skill.name} ({us.number_of_years_experience} years experience)</li>)}
           </ul>
-          </p> : null}
+          </div> : null}
         <p><b>Job Title:</b> {user.job_title}</p>
         <p><b>Location:</b> {user.location}</p>
         <p><b>Bio:</b> {user.bio}</p>
