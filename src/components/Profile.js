@@ -3,12 +3,12 @@ import {Link} from 'react-router-dom'
 
 const Profile = (props) => {
 
-
+  
 
   if (props.user) {
 
     const user = props.findUserById(props.user.id)
-    debugger
+    console.log(props.user)
   return (
     <div className="ui segment">
       <div className="ui top attached label">My Profile</div>
