@@ -46,8 +46,17 @@ class App extends Component {
     this.setState({ user });
   };
 
-  filterMentorsBySkill = (skill) => {
-    // this.setState({filteredMentors})
+  userHasSkill = (user, skillName) => {
+    return user.user_skills.filter(us => us.skill.name == skillName).length > 0 ? true : false
+  }
+
+  filterMentorsBySkill = (skillName) => {
+    if (skillName === "No Filter") {
+      this.setState({filteredMentors: this.state.allMentors})
+    } else {
+      let filteredMentors = this.state.allMentors.filter(mentor => this.userHasSkill(mentor, skillName))
+      this.setState({filteredMentors})
+    }
   }
 
    fetchUsers= () =>{
@@ -160,7 +169,7 @@ class App extends Component {
         )} />
         <Route path='/mentors' render={() => (
           <React.Fragment>
-            <Filter />
+            <Filter filterFunction={this.filterMentorsBySkill}/>
             <CardContainer users={this.state.filteredMentors} addMentor={this.addMentor}/>
           </React.Fragment>
         )} />

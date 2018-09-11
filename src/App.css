@@ -41,6 +41,11 @@ div#welcome {
   margin-top: 20px;
 }
 
+#filter-button {
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
 .ui.segment {
   width: 80%;
   margin: auto;
