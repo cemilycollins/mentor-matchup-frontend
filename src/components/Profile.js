@@ -1,20 +1,22 @@
 import React from "react"
 import {Link} from 'react-router-dom'
 import AddSkillForm from './AddSkillForm'
+import AddEditForm from './AddEditForm'
 
 
 export default class Profile extends React.Component{
   constructor(){
     super()
     this.state={
-      clicked: false
+      clickedSkill: false,
+      clickedEdit: false
     }
   }
 
   clickHandler=()=>{
-    let status = !this.state.clicked
+    let status = !this.state.clickedSkill
     this.setState({
-      clicked: status
+      clickedSkill: status
     })
   }
 
@@ -33,8 +35,16 @@ export default class Profile extends React.Component{
     })
   }
 
+  editFormClick=()=>{
+    let status = !this.state.clickedEdit
+    this.setState({clickedEdit: status })
+  }
+
   render(){
-    const skillForm = this.state.clicked ? <AddSkillForm clickHand={this.clickHandler} fetchUsers={this.props.fetchUsers} user={this.props.user}/> : null
+    const skillForm = this.state.clickedSkill ? <AddSkillForm clickHand={this.clickHandler} fetchUsers={this.props.fetchUsers} user={this.props.user}/> : null
+    const editForm = this.state.clickedEdit ? <AddEditForm editFormHand={this.editFormClick} fetchUsers={this.props.fetchUsers} user={this.props.findUserById(this.props.user.id)}/> : null
+
+
   if (this.props.user && this.props.findUserById(this.props.user.id)) {
     const user = this.props.findUserById(this.props.user.id)
   return (
@@ -50,11 +60,13 @@ export default class Profile extends React.Component{
         <p><b>Location:</b> {user.location}</p>
         <p><b>Bio:</b> {user.bio}</p>
       <div className='extra content'>
-        <div className='ui two buttons'>
+        <div className='ui three buttons'>
           <button className='ui active basic blue button' onClick={this.clickHandler}>Add Skill</button>
-          {skillForm}
           <Link to="/mentors" className='ui basic black button'>Back To All Mentors</Link>
+          <button  color= 'blue' className= 'ui basic purple button' onClick={this.editFormClick}>Edit Details</button>
         </div>
+        {skillForm}
+        {editForm}
       </div>
     </div>
   )} else {

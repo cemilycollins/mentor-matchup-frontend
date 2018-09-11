@@ -27,7 +27,7 @@ export default class AddSkillForm extends React.Component{
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": `Bearer${localStorage.getItem('token')}`
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({
         skill_id: parseInt(this.state.skill_id),
