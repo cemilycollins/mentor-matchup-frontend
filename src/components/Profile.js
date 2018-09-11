@@ -2,6 +2,7 @@ import React from "react"
 import {Link} from 'react-router-dom'
 import AddSkillForm from './AddSkillForm'
 
+
 export default class Profile extends React.Component{
   constructor(props){
     super(props)
@@ -18,7 +19,7 @@ export default class Profile extends React.Component{
   }
   render(){
     const skillForm = this.state.clicked ? <AddSkillForm fetchUsers={this.props.fetchUsers} user={this.props.user}/> : null
-  if (this.props.user) {
+  if (this.props.user && this.props.findUserById(props.user.id)) {
     const user = this.props.findUserById(this.props.user.id)
   return (
     <div className="ui segment">
@@ -32,7 +33,6 @@ export default class Profile extends React.Component{
         <p><b>Job Title:</b> {user.job_title}</p>
         <p><b>Location:</b> {user.location}</p>
         <p><b>Bio:</b> {user.bio}</p>
-
       <div className='extra content'>
         <div className='ui two buttons'>
           <button className='ui active basic blue button' onClick={this.clickHandler}>Add Skill</button>

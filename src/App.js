@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, withRouter } from 'react-router-dom';
 
 import Login from './components/LoginForm';
 import NavBar from './components/NavBar'
@@ -62,7 +62,6 @@ class App extends Component {
    })
    }
 
-
   componentDidMount(){
     if (localStorage.getItem("token")) {
      this.fetchUser();
@@ -70,42 +69,73 @@ class App extends Component {
     this.fetchUsers()
   }
 
-  // componentDidUpdate() {
-  //   if (localStorage.getItem("token")) {
-  //    this.fetchUser();
-  //   }
-  //   this.fetchUsers()
-  // }
-
   filterByType=(users,type)=>{
     return users.filter(user => user.type_of === type)
   }
 
+  userHasMentor = (id) => {
+    if (this.findUserById(this.state.user.id).mentor_matches.find(match => match.mentor_id == id)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   addMentor = (mentorId) => {
-    fetch('http://localhost:3000/matches', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "accepts": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify({
-        mentee_id: this.state.user.id,
-        mentor_id: mentorId
-      })
-    }).then(r => r.json())
-      .then(json => this.fetchUsers())
+    if (this.userHasMentor(mentorId)) {
+      alert("You've already selected that mentor!")
+    } else {
+      fetch('http://localhost:3000/matches', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "accepts": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          mentee_id: this.state.user.id,
+          mentor_id: mentorId
+        })
+      }).then(r => r.json())
+        .then(json => {
+          this.fetchUsers()
+          this.props.history.push('/profile')
+        })
+    }
+  }
+
+    deleteMatch = (matchId) => {
+      fetch(`http://localhost:3000/matches/${matchId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "accepts": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          id: matchId
+        })
+      }).then(r => r.json())
+        .then(json => {
+          this.fetchUsers()
+        })
     }
 
     findUserById=(id)=>{
       return this.state.allUsers.find(user=> user.id === id)
     }
 
+    logOut = () => {
+      this.setState({user: {}})
+      localStorage.clear()
+      this.props.history.push('/')
+    }
+
   render() {
 
     return (
       <React.Fragment>
-      <NavBar user={this.state.user}/>
+      <NavBar user={this.state.user} logOut={this.logOut}/>
       <Switch>
         <Route exact path='/' render={() => (
             <React.Fragment>
@@ -121,7 +151,7 @@ class App extends Component {
         <Route exact path='/profile' render={() => (
           <React.Fragment>
             <Profile fetchUsers={this.fetchUsers} user={this.state.user} findUserById={this.findUserById}/>
-            <MatchContainer user={this.state.user} findUserById={this.findUserById}/>
+            <MatchContainer user={this.state.user} findUserById={this.findUserById} deleteMatch={this.deleteMatch}/>
           </React.Fragment>
         )} />
         <Route path='/mentors' render={() => (
@@ -135,4 +165,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
