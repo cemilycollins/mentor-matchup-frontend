@@ -38,7 +38,8 @@ class App extends Component {
   }
 
   fetchUser = () => {
-    requestHelper("http://localhost:3000/me").then(this.updateUser);
+    requestHelper("http://localhost:3000/me").then(user => { this.updateUser(user)
+  });
   }
 
   updateUser = user => {
@@ -81,12 +82,12 @@ class App extends Component {
   }
 
   addMentor = (mentorId) => {
-    debugger
     fetch('http://localhost:3000/matches', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "accepts": "application/json"
+        "accepts": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({
         mentee_id: this.state.user.id,
