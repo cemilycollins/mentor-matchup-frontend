@@ -69,11 +69,19 @@ class App extends Component {
     this.fetchUsers()
   }
 
+  // componentDidUpdate() {
+  //   if (localStorage.getItem("token")) {
+  //    this.fetchUser();
+  //   }
+  //   this.fetchUsers()
+  // }
+
   filterByType=(users,type)=>{
     return users.filter(user => user.type_of === type)
   }
 
   addMentor = (mentorId) => {
+    debugger
     fetch('http://localhost:3000/matches', {
       method: "POST",
       headers: {
@@ -85,7 +93,7 @@ class App extends Component {
         mentor_id: mentorId
       })
     }).then(r => r.json())
-      .then(json => this.fetchUser())
+      .then(json => this.fetchUsers())
     }
 
     findUserById=(id)=>{
@@ -112,7 +120,7 @@ class App extends Component {
         <Route exact path='/profile' render={() => (
           <React.Fragment>
             <Profile user={this.state.user} findUserById={this.findUserById}/>
-            <MatchContainer />
+            <MatchContainer user={this.state.user} findUserById={this.findUserById}/>
           </React.Fragment>
         )} />
         <Route path='/mentors' render={() => (
