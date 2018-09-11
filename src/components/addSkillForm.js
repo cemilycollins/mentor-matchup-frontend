@@ -29,7 +29,7 @@ export default class addSkillForm extends React.Component{
       <label htmlFor="years">Skills Experience</label>
       <input type="text" name="years" placeholder="Years Experience with Skill" />
     </div>
-      <Button></Button>
+      <Button type= 'submit'>Submit</Button>
     </Form>
   )
 }
