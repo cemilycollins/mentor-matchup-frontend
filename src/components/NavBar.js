@@ -35,7 +35,7 @@ const NavBar = props => {
       >
         Mentors
       </NavLink> : null}
-      {props.user ? <NavLink id="nav-item"
+      {props.user && props.user.name ? <NavLink id="nav-item"
         exact
         to="/profile"
         className="ui item"
@@ -43,6 +43,9 @@ const NavBar = props => {
       >
         Profile
       </NavLink> : null}
+      {props.user && props.user.name ? <div className="ui button" onClick={props.logOut}>
+        Log Out
+      </div> : null}
 
     </div>
   );

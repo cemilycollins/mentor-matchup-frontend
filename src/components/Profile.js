@@ -2,10 +2,9 @@ import React from "react"
 import {Link} from 'react-router-dom'
 
 const Profile = (props) => {
-
-  if (props.user) {
+  console.log("props", props)
+  if (props.user && props.findUserById(props.user.id)) {
     const user = props.findUserById(props.user.id)
-    console.log(props.user)
   return (
     <div className="ui segment">
       <div className="ui top attached label">My Profile</div>
@@ -18,7 +17,6 @@ const Profile = (props) => {
         <p><b>Job Title:</b> {user.job_title}</p>
         <p><b>Location:</b> {user.location}</p>
         <p><b>Bio:</b> {user.bio}</p>
-
       <div className='extra content'>
         <div className='ui two buttons'>
           <div className='ui active basic blue button' onClick={() => console.log("mentee!!")}>Add Skill</div>

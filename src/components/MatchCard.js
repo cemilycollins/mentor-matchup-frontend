@@ -13,7 +13,7 @@ const MatchCard = (props) => {
         <p><b>Bio:</b> {user.bio}</p>
         {user.user_skills.length > 0 ? <div><b>Skills:</b>
           <ul>
-          {user.user_skills.map(us => <li>{us.skill.name} ({us.number_of_years_experience} years experience)}</li>)}
+          {user.user_skills.map(us => <li>{us.skill.name} ({us.number_of_years_experience} years experience)</li>)}
           </ul>
         </div> : null}
         <h3>Contact Info:</h3>
@@ -23,7 +23,7 @@ const MatchCard = (props) => {
       </div>
       <div className='extra content'>
         <div className='ui one button'>
-          <div className='ui active basic red button' onClick={() => console.log("deleting mentor")}>Delete This Match</div>
+          <div className='ui active basic red button' onClick={props.deleteMatch}>Delete This Match</div>
         </div>
       </div>
     </div>
