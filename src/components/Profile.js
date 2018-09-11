@@ -1,10 +1,26 @@
 import React from "react"
 import {Link} from 'react-router-dom'
+import AddSkillForm from './AddSkillForm'
 
-const Profile = (props) => {
-  console.log("props", props)
-  if (props.user && props.findUserById(props.user.id)) {
-    const user = props.findUserById(props.user.id)
+
+export default class Profile extends React.Component{
+  constructor(props){
+    super(props)
+    this.state={
+      clicked: false
+    }
+  }
+
+  clickHandler=()=>{
+    let status = !this.state.clicked
+    this.setState({
+      clicked: status
+    })
+  }
+  render(){
+    const skillForm = this.state.clicked ? <AddSkillForm fetchUsers={this.props.fetchUsers} user={this.props.user}/> : null
+  if (this.props.user && this.props.findUserById(props.user.id)) {
+    const user = this.props.findUserById(this.props.user.id)
   return (
     <div className="ui segment">
       <div className="ui top attached label">My Profile</div>
@@ -19,7 +35,8 @@ const Profile = (props) => {
         <p><b>Bio:</b> {user.bio}</p>
       <div className='extra content'>
         <div className='ui two buttons'>
-          <div className='ui active basic blue button' onClick={() => console.log("mentee!!")}>Add Skill</div>
+          <button className='ui active basic blue button' onClick={this.clickHandler}>Add Skill</button>
+          {skillForm}
           <Link to="/mentors" className='ui basic black button'>Back To All Mentors</Link>
         </div>
       </div>
@@ -28,5 +45,4 @@ const Profile = (props) => {
     return null
   }
 }
-
-export default Profile
+}
