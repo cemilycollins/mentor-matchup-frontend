@@ -7,6 +7,7 @@ import CardContainer from './containers/CardContainer'
 import NewUser from './components/CreateUserForm'
 import MatchContainer from './containers/MatchContainer'
 import Profile from './components/Profile'
+import Filter from './components/Filter'
 import './App.css';
 
 const requestHelper = url =>
@@ -32,7 +33,6 @@ class App extends Component {
       allMentors: [],
       allMentees: [],
       filteredMentors: [],
-      filter: '',
       user: null
     }
   }
@@ -45,6 +45,10 @@ class App extends Component {
   updateUser = user => {
     this.setState({ user });
   };
+
+  filterMentorsBySkill = (skill) => {
+    // this.setState({filteredMentors})
+  }
 
    fetchUsers= () =>{
      fetch('http://localhost:3000/users')
@@ -155,7 +159,10 @@ class App extends Component {
           </React.Fragment>
         )} />
         <Route path='/mentors' render={() => (
+          <React.Fragment>
+            <Filter />
             <CardContainer users={this.state.filteredMentors} addMentor={this.addMentor}/>
+          </React.Fragment>
         )} />
         <Route exact path='/new_user' component={NewUser}/>
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Button, Dropdown } from 'semantic-ui-react'
+
 export default class AddSkillForm extends React.Component{
   constructor(){
     super()
@@ -63,7 +64,7 @@ export default class AddSkillForm extends React.Component{
       <label htmlFor="skills_years">Skills Experience</label>
       <input onChange={(e)=>this.changeHandler(e.target.value,'skills_years')} type="text" name="number_of_years_experience" placeholder="Years Experience with Skill" />
     </div>
-      <Button  type= 'submit'>Submit</Button>
+      <Button type= 'submit'>Submit</Button>
     </Form>
   )
 }
