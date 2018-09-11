@@ -4,8 +4,8 @@ import AddSkillForm from './AddSkillForm'
 
 
 export default class Profile extends React.Component{
-  constructor(props){
-    super(props)
+  constructor(){
+    super()
     this.state={
       clicked: false
     }
@@ -19,7 +19,7 @@ export default class Profile extends React.Component{
   }
   render(){
     const skillForm = this.state.clicked ? <AddSkillForm fetchUsers={this.props.fetchUsers} user={this.props.user}/> : null
-  if (this.props.user && this.props.findUserById(props.user.id)) {
+  if (this.props.user && this.props.findUserById(this.props.user.id)) {
     const user = this.props.findUserById(this.props.user.id)
   return (
     <div className="ui segment">
