@@ -20,6 +20,7 @@ export default class AddSkillForm extends React.Component{
   }
 
   submitHandler=(event)=>{
+
     fetch('http://localhost:3000/user_skills', {
       method: "POST",
       headers: {
@@ -34,6 +35,7 @@ export default class AddSkillForm extends React.Component{
       })
     }).then(r => r.json())
     .then(json=>{
+      this.props.clickHand()
       console.log(json)
       this.props.fetchUsers()
     })

@@ -17,9 +17,25 @@ export default class Profile extends React.Component{
       clicked: status
     })
   }
+
+  deleteHandler=(id)=>{
+    fetch(`http://localhost:3000/user_skills/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Bearer${localStorage.getItem('token')}`
+      }
+    }).then(r => r.json())
+    .then(json=>{
+      console.log(json)
+      this.props.fetchUsers()
+    })
+  }
+
   render(){
-    const skillForm = this.state.clicked ? <AddSkillForm fetchUsers={this.props.fetchUsers} user={this.props.user}/> : null
-  if (this.props.user && this.props.findUserById(props.user.id)) {
+    const skillForm = this.state.clicked ? <AddSkillForm clickHand={this.clickHandler} fetchUsers={this.props.fetchUsers} user={this.props.user}/> : null
+  if (this.props.user && this.props.findUserById(this.props.user.id)) {
     const user = this.props.findUserById(this.props.user.id)
   return (
     <div className="ui segment">
@@ -27,7 +43,7 @@ export default class Profile extends React.Component{
         <p><b>Name:</b> {user.name}</p>
         {user.user_skills && user.user_skills.length > 0 ? <div><b>Skills:</b>
           <ul>
-          {user.user_skills.map(us => <li>{us.skill.name} ({us.number_of_years_experience} years experience)</li>)}
+          {user.user_skills.map(us => <li>{us.skill.name} ({us.number_of_years_experience} years experience)<button onClick={()=> this.deleteHandler(us.id)} className='delete_button'>x</button></li>)}
           </ul>
           </div> : null}
         <p><b>Job Title:</b> {user.job_title}</p>
