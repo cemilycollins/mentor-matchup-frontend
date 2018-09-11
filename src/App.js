@@ -120,7 +120,7 @@ class App extends Component {
         <Route exact path='/login' render={(props) => <Login {...props} updateUser={this.updateUser} />} />
         <Route exact path='/profile' render={() => (
           <React.Fragment>
-            <Profile user={this.state.user} findUserById={this.findUserById}/>
+            <Profile fetchUsers={this.fetchUsers} user={this.state.user} findUserById={this.findUserById}/>
             <MatchContainer user={this.state.user} findUserById={this.findUserById}/>
           </React.Fragment>
         )} />
