@@ -15,6 +15,9 @@ export default class Profile extends React.Component{
 
   clickHandler=()=>{
     let status = !this.state.clickedSkill
+    if(this.state.clickedEdit === true){
+      this.setState({clickedEdit: false})
+    }
     this.setState({
       clickedSkill: status
     })
@@ -37,7 +40,12 @@ export default class Profile extends React.Component{
 
   editFormClick=()=>{
     let status = !this.state.clickedEdit
-    this.setState({clickedEdit: status })
+    if(this.state.clickedSkill === true){
+      this.setState({clickedSkill: false})
+    }
+    this.setState({
+    clickedEdit: status
+   })
   }
 
   render(){
