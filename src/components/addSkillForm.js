@@ -21,25 +21,28 @@ export default class AddSkillForm extends React.Component{
   }
 
   submitHandler=(event)=>{
-
-    fetch('http://localhost:3000/user_skills', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify({
-        skill_id: parseInt(this.state.skill_id),
-        user_id: parseInt(this.props.user.id),
-        number_of_years_experience: parseInt(this.state.skills_years)
+    if (this.state.skill_id) {
+      fetch('http://localhost:3000/user_skills', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          skill_id: parseInt(this.state.skill_id),
+          user_id: parseInt(this.props.user.id),
+          number_of_years_experience: parseInt(this.state.skills_years)
+        })
+      }).then(r => r.json())
+      .then(json=>{
+        this.props.clickHand()
+        console.log(json)
+        this.props.fetchUsers()
       })
-    }).then(r => r.json())
-    .then(json=>{
-      this.props.clickHand()
-      console.log(json)
-      this.props.fetchUsers()
-    })
+    } else {
+      alert("Please choose a skill to add!")
+    }
   }
 
   changeHandler=(val, key)=>{

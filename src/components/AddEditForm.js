@@ -11,21 +11,9 @@ export default class AddEditForm extends React.Component{
       email: this.props.user.email,
       job_title: this.props.user.job_title,
       bio: this.props.user.bio,
-      type_of: this.props.user.type_of,
       location: this.props.user.location
     }
   }
-
-   arr = [
-    {
-    text: 'Mentor',
-    value: 'mentor'
-  },
-  {
-    text: 'Mentee',
-    value: 'mentee'
-  }
-  ]
 
     changeHandler=(val, key)=>{
       if(key === 'type_of'){
@@ -50,7 +38,6 @@ export default class AddEditForm extends React.Component{
           email: this.state.email,
           job_title: this.state.job_title,
           bio: this.state.bio,
-          type_of: this.state.type_of,
           location: this.state.location
         })
       })
@@ -87,7 +74,6 @@ export default class AddEditForm extends React.Component{
             <label htmlFor="bio">Bio</label>
             <textarea value= {this.state.bio} onChange={(e)=>this.changeHandler(e.target.value,'bio')}  name="bio" placeholder="Tell us about yourself..." />
           </div>
-          <Dropdown onChange={(e)=>this.changeHandler(e.target,'type_of')} placeholder='Pick one' fluid selection options={this.arr}/>
 
           <button to="/login" className="ui blue button" type="submit">Submit</button>
         </form>
