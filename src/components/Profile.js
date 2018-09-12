@@ -1,6 +1,6 @@
 import React from "react"
 import {Link} from 'react-router-dom'
-import AddSkillForm from './AddSkillForm'
+import AddSkillForm from './addSkillForm'
 import AddEditForm from './AddEditForm'
 
 
@@ -62,7 +62,7 @@ export default class Profile extends React.Component{
       <div className='extra content'>
         <div className='ui three buttons'>
           <button className='ui active basic blue button' onClick={this.clickHandler}>Add Skill</button>
-          <Link to="/mentors" className='ui basic black button'>Back To All Mentors</Link>
+          {user.type_of === "mentee" ? <Link to="/mentors" className='ui basic black button'>Back To All Mentors</Link> : <Link to="/mentees" className='ui basic black button'>Back To All Mentees</Link>}
           <button  color= 'blue' className= 'ui basic purple button' onClick={this.editFormClick}>Edit Details</button>
         </div>
         {skillForm}
